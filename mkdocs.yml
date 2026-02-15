@@ -1,34 +1,66 @@
-site_name: Beyond the Code Training
-site_description: Official training guide for the India Program
+site_name: MeTTa Training
+site_description: MeTTa programming language Training Portal
+site_url: https://metta-training.com
+
+# 1. THEME CONFIGURATION
 theme:
   name: material
+  
+  icon:
+    logo: material/school
+    favicon: material/code-tags
+  
+  font:
+    text: Inter
+    code: JetBrains Mono
+
   palette:
-    # Light mode
+    # Light Mode - "Aurora Day"
     - scheme: default
-      primary: teal
-      accent: purple
+      primary: custom  # Defined in extra.css
+      accent: custom   # Defined in extra.css
       toggle:
-        icon: material/brightness-7
+        icon: material/weather-night
         name: Switch to dark mode
-    # Dark mode
+    # Dark Mode - "Neon Night"
     - scheme: slate
-      primary: teal
-      accent: lime
+      primary: custom  # Defined in extra.css
+      accent: custom   # Defined in extra.css
       toggle:
-        icon: material/brightness-4
+        icon: material/weather-sunny
         name: Switch to light mode
+
   features:
     - navigation.tabs
+    - navigation.tabs.sticky
     - navigation.sections
-    - navigation.expand
+    - navigation.top
+    - search.suggest
     - search.highlight
-    - search.share
+    - content.code.copy
+    - content.tooltips
+    # Added for smoother UX
+    - navigation.tracking
+    - navigation.instant
 
+# 2. EXTENSIONS
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - attr_list
+  - md_in_html # REQUIRED: Enables parsing of icons/markdown inside HTML <div> tags
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+# 3. CUSTOM STYLING
+extra_css:
+  - stylesheets/extra.css
+
+# 4. NAVIGATION STRUCTURE
 nav:
-  - Overview: index.md
-  - Curriculum & Schedule: schedule.md
-  - Projects & Certification: projects.md
+  - Home: index.md
+  - Curriculum: schedule.md
+  - Projects: projects.md
   - Resources: resources.md
-
-plugins:
-  - search
