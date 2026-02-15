@@ -35,7 +35,7 @@ This program is conducted via two distinct tracks. Please review the requirement
 
 This track covers the comprehensive curriculum from foundational functional programming to advanced cognitive architectures.
 
-Access: Online tutorials and in person, training materials, and meeting recordings are open to the entire community.
+Access: Online tutorials, training materials, and meeting recordings are open to the entire community.
 
 Requirement: Trainees must propose a team project one month prior to the conclusion of the training.
 
