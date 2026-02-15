@@ -1,6 +1,6 @@
 site_name: MeTTa Training
 site_description: MeTTa programming language Training Portal
-# site_url: https://metta-training.com
+site_url: https://github.io/iCog-Labs-Dev/mettatraining
 
 # 1. THEME CONFIGURATION
 theme:
