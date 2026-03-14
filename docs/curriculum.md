@@ -1,41 +1,41 @@
-# Curriculum & Session Log
+# Curriculum
 
-This schedule outlines the progression of topics. Sessions are numbered sequentially.
+This curriculum outlines a structured path for learning MeTTa. Lessons are numbered sequentially to guide you through the language's concepts.
 
 ## Module 1: Foundations of MeTTa
 
 *Focus: Syntax, Functional Programming, and Data Types.*
 
-### Session 01: Program Introduction
+### Lesson 01: Introduction
 
 * Resource allocation and setup guide.
 * Workflow overview.
 
-### Session 02: Functional JS Foundations
+### Lesson 02: Functional JS Foundations
 
 * Functional programming paradigms.
 * Recursion and Immutability.
 * Higher-order functions.
 
-### Session 03: MeTTa Basics (Part I)
+### Lesson 03: MeTTa Basics (Part I)
 
 * Environment setup.
 * Basic syntax structure.
 * Built-in data types.
 * Variables and function definitions.
 
-### Session 04: MeTTa Basics (Part II)
+### Lesson 04: MeTTa Basics (Part II)
 
 * Control flow and loops.
 * Iterating over expressions.
 
-### Session 05: Atomspace Fundamentals
+### Lesson 05: Atomspace Fundamentals
 
 * Introduction to Atomspace concepts.
 * Pattern matching logic.
 * Revisiting functions/bindings with pattern matching.
 
-### Session 06: Standard Library
+### Lesson 06: Standard Library
 
 * Utilizing standard libraries for complex logic.
 
@@ -45,26 +45,26 @@ This schedule outlines the progression of topics. Sessions are numbered sequenti
 
 *Focus: Files, Recursion, and Type Systems.*
 
-### Session 07: Files and Modules
+### Lesson 07: Files and Modules
 
 * Module management.
 * File manipulation.
 
-### Session 08: Recursive Logic
+### Lesson 08: Recursive Logic
 
 * Converting iterative logic to recursive structures.
 
-### Session 09: Higher Order Logic
+### Lesson 09: Higher Order Logic
 
 * Advanced higher-order functions.
 * Refactoring recursive logic.
 
-### Session 10: Data Structures
+### Lesson 10: Data Structures
 
 * Types and constructors.
 * Lists, Trees, Sets, and Maps.
 
-### Session 11: State & Bindings
+### Lesson 11: State & Bindings
 
 * State Monad.
 * Python bindings and mutable structures.
@@ -75,32 +75,32 @@ This schedule outlines the progression of topics. Sessions are numbered sequenti
 
 *Focus: Application and Space Operations.*
 
-### Session 12: Revision
+### Lesson 12: Revision
 
 * Practical review of concepts covered to date.
 
-### Session 13: Live Build
+### Lesson 13: Live Build
 
-* Instructor-led coding session.
+* Guided coding lesson.
 
-### Session 14: Student Build
+### Lesson 14: Practical Exercise
 
 * Segmented building exercises.
 * Real-time alignment and troubleshooting.
 
-### Session 15: Non-Determinism
+### Lesson 15: Non-Determinism
 
 * Introduction to non-deterministic logic.
 
-### Session 16: Applied Non-Determinism
+### Lesson 16: Applied Non-Determinism
 
 * Practical exercises.
 
-### Session 17: Atomspace Revision
+### Lesson 17: Atomspace Revision
 
 * Space operations review.
 
-### Session 18: Custom Atomspaces
+### Lesson 18: Custom Atomspaces
 
 * Creating custom and nested spaces.
 
@@ -110,43 +110,43 @@ This schedule outlines the progression of topics. Sessions are numbered sequenti
 
 *Focus: Python Integration, Debugging, and the MORK Engine.*
 
-### Session 19: Use Cases
+### Lesson 19: Use Cases
 
 * Common Atomspace design patterns.
 
-### Session 20: Practical Application
+### Lesson 20: Practical Application
 
-* Exercise day: Atomspace implementation.
+* Exercise: Atomspace implementation.
 
-### Session 21: Unification
+### Lesson 21: Unification
 
 * Self-rewriting code.
 * Unification examples.
 
-### Session 22: Python Integration (I)
+### Lesson 22: Python Integration (I)
 
 * Custom function wrapping.
 
-### Session 23: Python Integration (II)
+### Lesson 23: Python Integration (II)
 
 * Advanced integration patterns.
 
-### Session 24: Debugging (I)
+### Lesson 24: Debugging (I)
 
-* **Milestone:** Team formation and project initiation.
+* Project initiation and design.
 * Debugging techniques.
 
-### Session 25: Debugging (II)
+### Lesson 25: Debugging (II)
 
 * Advanced troubleshooting.
 
-### Session 26: Intro to MORK (I)
+### Lesson 26: Intro to MORK (I)
 
 * Architecture differences.
 * Environment setup.
 * Pattern matching queries.
 
-### Session 27: Intro to MORK (II)
+### Lesson 27: Intro to MORK (II)
 
 * MM2 architecture.
 * Code stepping.
@@ -157,51 +157,51 @@ This schedule outlines the progression of topics. Sessions are numbered sequenti
 
 *Focus: Sources, Sinks, and Control Logic.*
 
-### Session 28: MM2 Fundamentals
+### Lesson 28: MM2 Fundamentals
 
 * Sources, Sinks, and Priority.
 
-### Session 29: Set Operations (I)
+### Lesson 29: Set Operations (I)
 
 * Basic set logic.
 
-### Session 30: Set Operations (II)
+### Lesson 30: Set Operations (II)
 
 * Advanced set logic.
 
-### Session 31: Project Review
+### Lesson 31: Project Design Review
 
-* Progress checks and idea validation.
+* Idea validation and structured approach.
 
-### Session 32: Control Logic (I)
+### Lesson 32: Control Logic (I)
 
 * MM2 control flow basics.
 
-### Session 33: Control Logic (II)
+### Lesson 33: Control Logic (II)
 
 * Intermediate control structures.
 
-### Session 34: Control Logic (III)
+### Lesson 34: Control Logic (III)
 
 * Advanced control patterns.
 
-### Session 35: Macros (I)
+### Lesson 35: Macros (I)
 
 * Macro definitions.
 
-### Session 36: Macros (II)
+### Lesson 36: Macros (II)
 
 * Macro implementation.
 
-### Session 37: Macros (III)
+### Lesson 37: Macros (III)
 
 * Advanced macros.
 
-### Session 38: Large Scale Programs (I)
+### Lesson 38: Large Scale Programs (I)
 
 * Architecture for scale.
 
-### Session 39: Large Scale Programs (II)
+### Lesson 39: Large Scale Programs (II)
 
 * Implementation strategies.
 
@@ -211,80 +211,52 @@ This schedule outlines the progression of topics. Sessions are numbered sequenti
 
 *Focus: Hyperon, Neurosymbolic AI, and Final Review.*
 
-### Session 40: Large Scale Programs (III)
+### Lesson 40: Large Scale Programs (III)
 
 * Scaling execution.
 
-### Session 41: Large Scale Programs (IV)
+### Lesson 41: Large Scale Programs (IV)
 
 * Optimization.
 
-### Session 42: Intro to Hyperon
+### Lesson 42: Intro to Hyperon
 
 * Symbolic AI vs. Neurosymbolic AI.
 * Cognitive Architectures.
 
-### Session 43: Algorithms (I)
+### Lesson 43: Algorithms (I)
 
 * OpenPsi.
 
-### Session 44: Algorithms (II)
+### Lesson 44: Algorithms (II)
 
 * ECAN (Economic Attention Networks).
 
-### Session 45: Algorithms (III)
+### Lesson 45: Algorithms (III)
 
 * Pattern Miner.
 
-### Session 46: Algorithms (IV)
+### Lesson 46: Algorithms (IV)
 
 * MOSES.
 
-### Session 47: Algorithms (V)
+### Lesson 47: Algorithms (V)
 
 * PLN (Probabilistic Logic Networks).
 
-### Session 48: Algorithms (VI)
+### Lesson 48: Algorithms (VI)
 
 * Cognitive Synergy.
 
-### Session 49: Ecosystem
+### Lesson 49: Ecosystem
 
 * Alternative Compilers (PeTTa).
 * ASI Chain and MeTTaIL.
 
-### Session 50: Mentoring
+### Lesson 50: Development Mentoring
 
-* Online project guidance.
+* Project guidance.
 
-### Session 51: Mentoring
+### Lesson 51: Development Mentoring
 
-* Online project guidance.
-
----
-
-## Module 7: Evaluation (In-Person)
-
-*Focus: Assessment and Certification.*
-
-### Session 52: Review
-
-* Internal project review (No class).
-
-### Session 53: Certification
-
-* Certification ceremony.
-* Next cohort announcements.
-
-### Session 54: Revision
-
-* Technical review of concepts (up to Python integration).
-
-### Session 55: Fast Track Selection
-
-* Hacking session for Fast Track candidates.
-
-### Session 56: Final Evaluation
-
-* Project presentations.
-* Announcement of selected teams.
+* Project guidance.

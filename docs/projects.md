@@ -1,28 +1,25 @@
-# Projects & Certification
+# Projects
 
-Completion of the training program is contingent upon the successful delivery of a capstone project.
+Practical application is key to mastering MeTTa. This page provides guidance and ideas for projects using MeTTa and the Atomspace.
 
-## Requirements
+## Project Guidance
 
-### Team Structure
+When starting a MeTTa project, consider the following:
 
-Projects are to be executed in teams. We encourage diverse skill sets within each team to handle logic, integration, and architecture.
+- **Logic and Integration:** How will your symbolic logic interact with external data or Python-based tools?
+- **Space Management:** How will you structure your Atomspaces for efficient pattern matching?
+- **Architecture:** Utilize the MM2 architecture (Sources, Sinks, Priority) for large-scale applications.
 
-### Normal Track Timeline
+## Project Ideas
 
-* **Proposal:** Teams must submit a project proposal **one month** before the training concludes.
-* **Scope:** Projects must utilize concepts covered in the curriculum (MeTTa, Atomspace).
-* **Evaluation:** Projects will be presented during the final sessions (Sessions 52-56).
+1. **Expert Systems:** Build a diagnostic tool or recommendation engine using symbolic rules.
+2. **Natural Language Processing:** Use pattern matching to parse and analyze text structures.
+3. **Robotic Control:** Implement high-level decision-making logic for autonomous agents.
+4. **Knowledge Graphs:** Create and query complex relational data using custom Atomspaces.
 
-### Fast Track Timeline
+## Evaluation and Refinement
 
-* **Formation:** Teams are formed immediately following the first month of the fast track.
-* **Execution:** Teams have one month to execute and deliver the project.
-
-## Certification Criteria
-
-Certificates are awarded based on:
-
-1. **Technical Implementation:** Correct usage of MeTTa and MORK.
-2. **Attendance:** Adherence to the attendance policy (< 3 absences).
-3. **Project Delivery:** Successful presentation and functionality of the final build.
+Successful MeTTa projects demonstrate:
+- Correct usage of MeTTa syntax and built-in types.
+- Efficient pattern matching and space operations.
+- Clear separation between logic and implementation.
