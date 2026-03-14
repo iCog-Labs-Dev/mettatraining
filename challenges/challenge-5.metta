@@ -15,5 +15,3 @@
 ;;
 ;; HINT:
 ;; You will need to use (bind! math (py-atom math))
-
-;; [INSERT SOLUTION HERE]

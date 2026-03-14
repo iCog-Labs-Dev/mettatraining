@@ -17,5 +17,3 @@
 ;;
 ;; TEST CASE:
 ;; !(count-digits 90721 0) ; Should return 5
-
-;; [INSERT SOLUTION HERE]

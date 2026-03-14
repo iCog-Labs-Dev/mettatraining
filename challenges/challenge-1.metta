@@ -1,5 +1,5 @@
 ;; ----------------------------------------------------------
-;; CHALLENGE 1: Conditional Summation (The Filter)
+;; CHALLENGE 1: Conditional Summation
 ;; ----------------------------------------------------------
 ;; TASK:
 ;; Write a higher-order function 'sumIf' that computes the sum 
@@ -22,5 +22,3 @@
 ;;
 ;; TEST CASE:
 ;; !(sumIf id isEven 1 5) ; Should return 6 (2 + 4)
-
-;; [INSERT SOLUTION HERE]

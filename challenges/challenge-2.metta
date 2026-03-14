@@ -18,7 +18,3 @@
 ;;
 ;; TEST CASE:
 ;; !(accumulate + 0 id 1 4) ; Should return 10
-
-;; [INSERT SOLUTION HERE]
-
-

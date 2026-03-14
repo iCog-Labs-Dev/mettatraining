@@ -15,5 +15,3 @@
 ;; 2. Get the Mother of Pam.
 ;; 3. Get the Siblings of Pam (Hard: must share parents but not be Pam).
 ;; 4. Get all Predecessors of Bob (Recursive search).
-
-;; [INSERT SOLUTION HERE]

@@ -15,5 +15,3 @@
 ;; GOAL: 
 ;; Understand how to use MeTTa as a knowledge store for 
 ;; external applications.
-
-;; [INSERT MeTTa DATABASE ENTRIES HERE]
