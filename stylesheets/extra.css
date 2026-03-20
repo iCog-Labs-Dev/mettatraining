@@ -1,0 +1,86 @@
+/* "OCEANIC" THEME TEMPLATE
+   Deep Teal, Electric Blue, and modern glassmorphism 
+*/
+
+:root {
+  /* Light Mode: Deep Teal/Ocean Gradient Base */
+  --md-primary-fg-color: #00695c;        /* Deep Teal */
+  --md-primary-fg-color--light: #4db6ac; /* Light Teal */
+  --md-primary-fg-color--dark: #004d40;  /* Darker Teal */
+  --md-accent-fg-color: #2979ff;         /* Electric Blue Accent */
+}
+
+[data-md-color-scheme="slate"] {
+  /* Dark Mode: Deep Sea Black with Mint Neon */
+  --md-primary-fg-color: #000000;        /* Pure Black Header */
+  --md-primary-fg-color--light: #006064; /* Cyan/Teal hint */
+  --md-primary-fg-color--dark: #000000;
+  
+  --md-accent-fg-color: #64ffda;         /* Neon Mint Accent */
+  
+  /* Make the background slightly richer than standard slate */
+  --md-default-bg-color: #0f1315;
+}
+
+/* --- EXCITING VISUALS --- */
+
+/* 1. Gradient Header */
+.md-header {
+  background: linear-gradient(135deg, var(--md-primary-fg-color), #004d40) !important;
+}
+
+[data-md-color-scheme="slate"] .md-header {
+  /* Dark mode gradient: Black to Deep Cyan */
+  background: linear-gradient(to right, #000000, #004d40) !important;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+/* 2. Modern Tab Navigation */
+.md-tabs {
+  background: transparent !important; /* Let the header gradient show through */
+}
+
+/* 3. Hero Section - "Glass" effect */
+.hero-section {
+  padding: 4rem 1rem;
+  margin-bottom: 2rem;
+  /* Complex exciting gradient: Teal -> Cyan -> Blue */
+  background: linear-gradient(120deg, #004d40 0%, #00838f 50%, #1565c0 100%);
+  color: white;
+  text-align: center;
+  border-radius: 1rem; /* More rounded */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15); /* Drop shadow depth */
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* 4. Card Hover Effects */
+.grid.cards > div {
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease;
+  border: 1px solid rgba(128,128,128, 0.1);
+}
+
+.grid.cards > div:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  border-color: var(--md-accent-fg-color);
+}
+
+/* Icons in cards */
+.grid.cards h3 {
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--md-primary-fg-color);
+  font-weight: 700;
+}
+
+[data-md-color-scheme="slate"] .grid.cards h3 {
+  color: var(--md-accent-fg-color); /* Neon accent in dark mode */
+}
