@@ -1,24 +1,20 @@
 # parser.py (compact, attempts only allowed shapes)
-import os, json, re
+import json
+import os
+import re
 from dotenv import load_dotenv
-import google.generativeai as genai
+import requests
 import inspect
 
 load_dotenv()
-KEY = os.getenv("GEMINI_API_KEY")
-MODEL_NAME = os.getenv("GEMINI_MODEL", "gemini-3.5-flash")
+KEY = (
+    os.getenv("NVIDIA_API_KEY")
+    or os.getenv("NEMOTRON_API_KEY")
+    or os.getenv("AI_API_KEY")
+)
+MODEL_NAME = os.getenv("NVIDIA_MODEL", "nvidia/llama-3.3-nemotron-super-49b-v1.5")
+API_BASE_URL = os.getenv("NVIDIA_API_BASE_URL", "https://integrate.api.nvidia.com/v1").rstrip("/")
 DATA_FILE = os.path.join(os.path.dirname(__file__), "data.metta")
-
-# try model object
-MODEL = None
-MODEL_IS_OBJ = False
-if KEY:
-    genai.configure(api_key=KEY)
-    try:
-        MODEL = genai.GenerativeModel(MODEL_NAME)
-        MODEL_IS_OBJ = True
-    except Exception:
-        MODEL = "models/text-bison-001"
 
 SCHEMA = ('Reply with ONLY one JSON object like: '
           '{"subject":<string|null>,"relation":"any"|"Friend"|"Colleague"|"Family"|"Neighbor"|"Classmate",'
@@ -27,6 +23,34 @@ SCHEMA = ('Reply with ONLY one JSON object like: '
 RELATIONS = ["Friend", "Colleague", "Family", "Neighbor", "Classmate"]
 ATTRIBUTE_TYPES = ["Profession", "Hobby"]
 
+EXISTS_PATTERNS = (
+    r"\bis there\b",
+    r"\bdo i know\b",
+    r"\bdo i have\b",
+    r"\bare there\b",
+)
+
+LIST_PATTERNS = (
+    r"\bwho\b",
+    r"\bfind\b",
+    r"\blist\b",
+    r"\bshow\b",
+)
+
+def _detect_question_type(text):
+    if any(re.search(pattern, text) for pattern in EXISTS_PATTERNS):
+        return "exists"
+    if any(re.search(pattern, text) for pattern in LIST_PATTERNS):
+        return "list"
+    return "list"
+
+# {
+#     "question_type": question_type,
+#     "subject": subject,
+#     "relation": relation,
+#     "target_attribute": {...},
+#     "max_depth": ...
+# }
 
 def _load_known_terms():
     known_people = set()
@@ -76,6 +100,7 @@ def _extract_max_depth(text):
 
 def _parse_question_locally(q, assumed_subject=None):
     text = q.lower()
+    question_type = _detect_question_type(text)
 
     relation = "any"
     for rel in RELATIONS:
@@ -92,7 +117,7 @@ def _parse_question_locally(q, assumed_subject=None):
     profession = _find_known_value(text, KNOWN_ATTRIBUTES["Profession"])
     hobby = _find_known_value(text, KNOWN_ATTRIBUTES["Hobby"])
 
-    if "hobby" in text or "play" in text:
+    if "hobby" in text or "play" in text or "likes" in text or "like " in text:
         attr_type, attr_value = "Hobby", hobby
     else:
         attr_type, attr_value = "Profession", profession or hobby
@@ -103,6 +128,7 @@ def _parse_question_locally(q, assumed_subject=None):
         return None
 
     return {
+        "question_type": question_type,
         "subject": subject,
         "relation": relation,
         "target_attribute": {"type": attr_type, "value": attr_value},
@@ -110,44 +136,59 @@ def _parse_question_locally(q, assumed_subject=None):
     }
 
 def _call(prompt):
-    last = None
     if not KEY:
-        raise RuntimeError("GEMINI_API_KEY missing and the local parser could not understand this question")
+        raise RuntimeError("NVIDIA_API_KEY missing and the local parser could not understand this question")
 
-    if MODEL_IS_OBJ:
-        try:
-            return MODEL.generate_content(prompt)
-        except Exception as e:
-            raise RuntimeError(f"Gemini generateContent failed for model {MODEL_NAME}: {e}") from e
+    try:
+        response = requests.post(
+            f"{API_BASE_URL}/chat/completions",
+            headers={
+                "Authorization": f"Bearer {KEY}",
+                "Content-Type": "application/json",
+            },
+            json={
+                "model": MODEL_NAME,
+                "messages": [
+                    {
+                        "role": "system",
+                        "content": "You convert natural-language questions into compact JSON for a graph search application.",
+                    },
+                    {"role": "user", "content": prompt},
+                ],
+                "temperature": 0,
+                "max_tokens": 300,
+                "stream": False,
+            },
+            timeout=30,
+        )
+    except requests.RequestException as error:
+        raise RuntimeError(f"NVIDIA API request failed: {error}") from error
 
-    # fallback to function API if present
-    if hasattr(genai, "generate_text"):
-        text_model = MODEL if isinstance(MODEL, str) else MODEL_NAME
-        for kwargs in (
-            {"model": text_model, "prompt": prompt},
-            {"model": text_model, "input": prompt},
-        ):
-            try:
-                return genai.generate_text(**kwargs)
-            except Exception as e:
-                last = e
-                continue
+    if response.status_code >= 400:
+        details = response.text.strip()
+        raise RuntimeError(
+            f"NVIDIA API request failed with status {response.status_code}: {details}"
+        )
 
-    raise RuntimeError("All call shapes failed. Last error: " + (str(last) if last else "none"))
+    return response.json()
 
 def _txt(resp):
-    if hasattr(resp, "candidates") and resp.candidates:
-        c = resp.candidates[0]
-        content = getattr(c, "content", None)
-        if isinstance(content, str):
-            return content
-        if isinstance(content, (list, tuple)) and content:
-            first = content[0]
-            if isinstance(first, dict):
-                return first.get("text") or first.get("content") or json.dumps(first)
-            return getattr(first, "text", str(first))
-    if hasattr(resp, "text"):
-        return resp.text
+    if isinstance(resp, dict):
+        choices = resp.get("choices") or []
+        if choices:
+            message = choices[0].get("message") or {}
+            content = message.get("content")
+            if isinstance(content, str):
+                return content
+            if isinstance(content, list):
+                text_parts = []
+                for item in content:
+                    if isinstance(item, dict) and item.get("type") == "text":
+                        text_parts.append(item.get("text", ""))
+                if text_parts:
+                    return "".join(text_parts)
+        if "text" in resp:
+            return str(resp["text"])
     return str(resp)
 
 def parse_question_to_json(q, assumed_subject):
@@ -165,6 +206,7 @@ def parse_question_to_json(q, assumed_subject):
         raise ValueError("No JSON in model output:\n" + text)
     parsed = json.loads(text[i:j+1])
     parsed["subject"] = parsed.get("subject") or assumed_subject
+    parsed["question_type"] = parsed.get("question_type") or _detect_question_type(q.lower())
     parsed["max_depth"] = max(1, min(5, int(parsed.get("max_depth", 1))))
     return parsed
 
@@ -179,8 +221,3 @@ if __name__ == "__main__":
             print(json.dumps(parse_question_to_json(q, assumed_subject="Alice"), indent=2))
         except Exception as e:
             print("Error:", e)
-            # helpful debug: show generate_content signature if object exists
-            if MODEL_IS_OBJ and hasattr(MODEL, "generate_content"):
-                print("generate_content signature:", inspect.signature(MODEL.generate_content))
-            if MODEL_IS_OBJ and hasattr(MODEL, "start_chat"):
-                print("start_chat signature:", inspect.signature(MODEL.start_chat))

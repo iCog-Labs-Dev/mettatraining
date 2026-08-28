@@ -57,7 +57,7 @@ def format_llm_error(action, error):
     if "429" in message and "quota" in message.lower():
         retry_after = retry_delay_seconds(message)
         wait_text = f" Wait about {retry_after} seconds before trying again." if retry_after else " Wait a bit before trying again."
-        return f"{action}: Gemini free-tier quota exceeded.{wait_text}"
+        return f"{action}: NVIDIA API quota exceeded.{wait_text}"
     return f"{action}: {message}"
 
 
@@ -72,6 +72,7 @@ def sort_results(results):
 
 
 def build_answer(parsed_query, results):
+    question_type = parsed_query.get("question_type") or "list"
     subject = parsed_query.get("subject") or "the selected person"
     relation = parsed_query.get("relation") or "any"
     attribute = parsed_query.get("target_attribute") or {}
@@ -82,10 +83,18 @@ def build_answer(parsed_query, results):
     attribute_text = f"{attribute_type} {attribute_value}" if attribute_value else f"that {attribute_type}"
     relation_text = "any relationship" if relation == "any" else relation.lower()
     depth_text = f" within {max_depth} hop{'s' if max_depth != 1 else ''}" if max_depth else ""
+    network_text = f"in {subject}'s network through {relation_text}{depth_text}"
 
     if not results:
+        if question_type == "exists":
+            return f"No, I did not find anyone {network_text} with {attribute_text}."
         return f"I did not find anyone in {subject}'s network with {attribute_text} through {relation_text}{depth_text}."
-
+    if question_type == "exists":
+        return (
+            f"Yes, I found {len(ordered_results)} match"
+            f"{'es' if len(ordered_results) != 1 else ''} "
+            f"{network_text} with {attribute_text}: {matches}."
+        )
     ordered_results = sort_results(results)
     matches = ", ".join(f"{name} (depth {depth})" for name, depth in ordered_results)
     return f"I found {len(ordered_results)} match{'es' if len(ordered_results) != 1 else ''} in {subject}'s network with {attribute_text}: {matches}."
@@ -146,7 +155,9 @@ If no results, politely say that none were found.
 # --- Gradio Interface ---
 with gr.Blocks() as demo:
     gr.Markdown("## 🧠 Relationship Network Search")
-    gr.Markdown("Ask a question about Alice's network and get answers with the matching search results.")
+    gr.Markdown(
+        "Ask list or yes/no questions about Alice's network and get answers from the matching search results."
+    )
 
     with gr.Row():
         with gr.Column(scale=3):
